@@ -13,10 +13,45 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-    // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-    // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-    // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-    guard let _ = (scene as? UIWindowScene) else { return }
+    guard let windowScene = (scene as? UIWindowScene) else { return }
+
+    window = UIWindow(windowScene: windowScene)
+
+    // 탭바컨트롤러의 생성
+    let tabBarVC = MainTabBarController()
+
+    // 첫번째 화면은 네비게이션컨트롤러로 만들기 (기본루트뷰 설정)
+    let vc1 = UINavigationController(rootViewController: FeedViewController())
+    let vc2 = UINavigationController(rootViewController: ExploreViewController())
+    let vc3 = UINavigationController(rootViewController: NotificationViewController())
+    let vc4 = UINavigationController(rootViewController: ConversationsViewController())
+
+    // 네비게이션바 설정
+    [vc1, vc2, vc3, vc4].forEach {
+      let appearance = UINavigationBarAppearance()
+      appearance.configureWithOpaqueBackground()
+      appearance.backgroundColor = .white
+      $0.navigationBar.tintColor = .systemBlue
+      $0.navigationBar.standardAppearance = appearance
+      $0.navigationBar.compactAppearance = appearance
+      $0.navigationBar.scrollEdgeAppearance = appearance
+    }
+
+    // 탭바로 사용하기 위한 뷰 컨트롤러들 설정
+    tabBarVC.setViewControllers([vc1, vc2, vc3, vc4], animated: false)
+    tabBarVC.modalPresentationStyle = .fullScreen
+    tabBarVC.tabBar.backgroundColor = .white
+
+    // 탭바 이미지 설정 (이미지 리터럴)
+    guard let items = tabBarVC.tabBar.items else { return }
+    items[0].image = #imageLiteral(resourceName: "home_unselected")
+    items[1].image = #imageLiteral(resourceName: "search_unselected")
+    items[2].image = #imageLiteral(resourceName: "like_unselected")
+    items[3].image = #imageLiteral(resourceName: "mail")
+
+    // 기본루트뷰를 탭바컨트롤러로 설정⭐️⭐️⭐️
+    window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+    window?.makeKeyAndVisible()
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {
