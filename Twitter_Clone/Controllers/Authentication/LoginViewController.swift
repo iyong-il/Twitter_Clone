@@ -20,47 +20,63 @@ final class LoginViewController: UIViewController {
     return iv
   }()
 
-  private let emailContainerView: UIView = {
-    let view = UIView()
-    view.backgroundColor = .systemBlue
-    view.anchor(height: 50)
-
-    let iv = UIImageView()
-    iv.image = #imageLiteral(resourceName: "mail")
-
-    view.addSubview(iv)
-    iv.tintColor = .white
-    iv.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, paddingLeft: 8, paddingBottom: 8)
-    iv.setDimensions(width: 24, height: 24)
+  private lazy var emailContainerView: UIView = {
+    let image = #imageLiteral(resourceName: "ic_mail_outline_white_2x-1")
+    let view = Utilities().inputContainerView(withImage: image, textField: emailTextField)
 
     return view
   }()
 
-  private let passwordContainerView: UIView = {
-    let view = UIView()
-    view.backgroundColor = .systemYellow
-//    view.anchor(height: 50)
-
-    let iv = UIImageView()
-    iv.image = #imageLiteral(resourceName: "ic_lock_outline_white_2x")
-
-    view.addSubview(iv)
-    iv.tintColor = .white
-    iv.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, paddingLeft: 8, paddingBottom: 8)
-    iv.setDimensions(width: 24, height: 24)
+  private lazy var passwordContainerView: UIView = {
+    let image = #imageLiteral(resourceName: "ic_lock_outline_white_2x")
+    let view = Utilities().inputContainerView(withImage: image, textField: passwordTextField)
 
     return view
+  }()
+
+  private let emailTextField: UITextField = {
+    let tf = Utilities().textField(withPlaceholder: "Email")
+    tf.autocapitalizationType = .none
+
+    return tf
+  }()
+
+  private let passwordTextField: UITextField = {
+    let tf = Utilities().textField(withPlaceholder: "Password")
+    tf.isSecureTextEntry = true
+
+    return tf
+  }()
+
+  private let loginButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("Log In", for: .normal)
+    button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+    button.setTitleColor(.twitterBlue, for: .normal)
+    button.backgroundColor = .white
+    // 스택뷰가 fillequaliy라서 주석처리
+    // button.anchor(height: 50)
+    button.layer.cornerRadius = 5
+    button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+
+    return button
   }()
 
   private lazy var stack: UIStackView = {
-    let st = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView])
+    let st = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, loginButton])
     st.axis = .vertical
-    st.spacing = 8
+    st.spacing = 20
     st.distribution = .fillEqually
 
     return st
   }()
 
+  private let dontHaveAccountButton: UIButton = {
+    let button = Utilities().attributedButton("Don't have an account?", " Sign Up")
+    button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
+
+    return button
+  }()
 
 
   // MARK: - 라이프사이클
@@ -82,7 +98,10 @@ final class LoginViewController: UIViewController {
     logoImageView.setDimensions(width: 150, height: 150)
 
     self.view.addSubview(stack)
-    stack.anchor(top: logoImageView.bottomAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor)
+    stack.anchor(top: logoImageView.bottomAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingLeft: 32, paddingRight: 32)
+
+    self.view.addSubview(dontHaveAccountButton)
+    dontHaveAccountButton.anchor(left: self.view.leftAnchor, bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.rightAnchor, paddingLeft: 40, paddingRight: 40)
 
   }
 
@@ -94,7 +113,17 @@ final class LoginViewController: UIViewController {
   }
 
 
+  // MARK: - 셀렉터
+  // 로그인버튼
+  @objc func handleLogin() {
 
+  }
+
+  // 하단버튼
+  @objc func handleShowSignUp() {
+    let vc = RegistrationViewController()
+    self.navigationController?.pushViewController(vc, animated: true)
+  }
 
 
 
