@@ -6,8 +6,7 @@
 //
 
 import UIKit
-// 강의에서는 class로 했으나,
-// 구조체를 안 쓸 이유가 없어서 바꿈 - 애플은 구조체를 권장함
+
 struct Utilities {
 
   func inputContainerView(withImage image: UIImage, textField: UITextField) -> UIView {

@@ -11,3 +11,8 @@ enum DB {
   static let DB_REF = Database.database().reference()
   static let REF_USERS = DB_REF.child("users")
 }
+
+enum STORAGE {
+  static let STORAGE_REF = Storage.storage().reference()
+  static let STORAGE_PROFILE_IMAGES = STORAGE_REF.child("profile_images")
+}

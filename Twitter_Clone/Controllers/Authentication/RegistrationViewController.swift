@@ -108,12 +108,12 @@ final class RegistrationViewController: UIViewController {
 
   // MARK: - 라이프사이클
   // 뷰디드로드
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupUI()
 
-    }
-    
+  }
+
 
   // MARK: - 메서드
   // UI
@@ -149,23 +149,20 @@ final class RegistrationViewController: UIViewController {
     guard let fullname = fullNameTextField.text else { return }
     guard let username = userNameTextField.text else { return }
 
-    // 파이어베이스 auth
-    Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-      if let error = error {
-        print(error.localizedDescription)
-        return
-      }
+    
+    let credentials = AuthCredentials(profileImage: profileImage, email: email, password: password, fullname: fullname, username: username)
+    AuthService.shared.registerUser(credential: credentials) { (ref, error) in
 
-      // 파이어베이스 database
-      guard let uid = result?.user.uid else { return }
-      let values = ["email": email, "username": username, "fullname": fullname]
+      print(#fileID, #function, #line, "- 회원가입성공")
 
-      DB.REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
-        print("")
-      }
+      guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}),
+            let tab = window.rootViewController as? MainTabBarController else { return }
+      
+      tab.authenticationUserAndSetupUI()
 
-
+      self.dismiss(animated: true)
     }
+
 
   }
 

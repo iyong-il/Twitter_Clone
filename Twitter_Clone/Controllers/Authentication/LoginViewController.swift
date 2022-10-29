@@ -112,11 +112,27 @@ final class LoginViewController: UIViewController {
 
   }
 
-
   // MARK: - 셀렉터
   // 로그인버튼
   @objc func handleLogin() {
+    guard let email = emailTextField.text else { return }
+    guard let password = passwordTextField.text else { return }
 
+    AuthService.shared.logUserIn(email: email, password: password) { (result, error) in
+      if let error = error {
+        print(#fileID, #function, #line, "- 아이디및 비밀번호가 일치하지 않습니다.: \(error.localizedDescription)")
+        return
+      }
+
+      print(#fileID, #function, #line, "- 로그인 성공")
+      
+      guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}),
+            let tab = window.rootViewController as? MainTabBarController else { return }
+
+      tab.authenticationUserAndSetupUI()
+
+      self.dismiss(animated: true)
+    }
   }
 
   // 하단버튼

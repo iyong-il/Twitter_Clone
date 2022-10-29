@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 final class MainTabBarController: UITabBarController {
 
@@ -24,7 +25,10 @@ final class MainTabBarController: UITabBarController {
   // 뷰디드로드
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+      self.view.backgroundColor = UIColor.twitterBlue
+      setupUI()
+      authenticationUserAndSetupUI()
+//      logUserOut()
 
     }
 
@@ -37,8 +41,33 @@ final class MainTabBarController: UITabBarController {
     actionButton.layer.cornerRadius = 56 / 2
   }
 
+  // 로그인 되었는지 검사
+  func authenticationUserAndSetupUI() {
+    if Auth.auth().currentUser == nil {
+      // UI담당은 메인큐에서 한다.
+      DispatchQueue.main.async {
+        let vc = UINavigationController(rootViewController: LoginViewController())
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+      }
+    } else {
+      setupUI()
+    }
+  }
+
+  // 강제 로그아웃
+  func logUserOut() {
+    do {
+      try Auth.auth().signOut()
+      print(#fileID, #function, #line, "- 로그아웃 되었습니다.")
+
+    } catch let error {
+      print(error.localizedDescription)
+    }
+  }
+
   // MARK: - 셀렉터
-  // 오른쪽 하단버튼
+  // 오른쪽 하단 동그라미버튼
   @objc func actionButtonTapped() {
 
   }

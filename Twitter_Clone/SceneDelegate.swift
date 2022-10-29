@@ -50,7 +50,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     items[3].image = #imageLiteral(resourceName: "mail")
 
     // 기본루트뷰를 탭바컨트롤러로 설정⭐️⭐️⭐️
-    window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+    window?.rootViewController = tabBarVC
     window?.makeKeyAndVisible()
   }
 
