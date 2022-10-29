@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import Firebase
 
 final class RegistrationViewController: UIViewController {
 
   // MARK: - 속성
   // 이미지피커
   private let imagePicker = UIImagePickerController()
+
+  private var profileImage: UIImage?
 
   private lazy var plusPhotoButton: UIButton = {
     let button = UIButton(type:  .system)
@@ -65,14 +68,12 @@ final class RegistrationViewController: UIViewController {
 
   private let fullNameTextField: UITextField = {
     let tf = Utilities().textField(withPlaceholder: "Full Name")
-    tf.autocapitalizationType = .none
 
     return tf
   }()
 
   private let userNameTextField: UITextField = {
     let tf = Utilities().textField(withPlaceholder: "Username")
-    tf.isSecureTextEntry = true
 
     return tf
   }()
@@ -141,6 +142,30 @@ final class RegistrationViewController: UIViewController {
 
   // 회원가입 버튼
   @objc func handleRegistration() {
+    guard let profileImage = self.profileImage else { return }
+
+    guard let email = emailTextField.text else { return }
+    guard let password = passwordTextField.text else { return }
+    guard let fullname = fullNameTextField.text else { return }
+    guard let username = userNameTextField.text else { return }
+
+    // 파이어베이스 auth
+    Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
+
+      // 파이어베이스 database
+      guard let uid = result?.user.uid else { return }
+      let values = ["email": email, "username": username, "fullname": fullname]
+
+      DB.REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
+        print("")
+      }
+
+
+    }
 
   }
 
@@ -155,6 +180,8 @@ extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigat
 
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     guard let profileImage = info[.editedImage] as? UIImage else { return }
+
+    self.profileImage = profileImage
 
     plusPhotoButton.layer.cornerRadius = 128 / 2
     plusPhotoButton.layer.borderColor = UIColor.white.cgColor
