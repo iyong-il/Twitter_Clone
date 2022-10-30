@@ -11,6 +11,15 @@ import Firebase
 final class MainTabBarController: UITabBarController {
 
   // MARK: - 속성
+  var user: User? {
+    didSet {
+      guard let nav = self.viewControllers?[0] as? UINavigationController else { return }
+      guard let feed = nav.viewControllers.first as? FeedViewController else { return }
+//      guard let user = user else { return }
+
+      feed.user = user
+    }
+  }
   lazy var actionButton: UIButton = {
     let button = UIButton(type: .system)
     button.tintColor = .white
@@ -28,6 +37,7 @@ final class MainTabBarController: UITabBarController {
       self.view.backgroundColor = UIColor.twitterBlue
       setupUI()
       authenticationUserAndSetupUI()
+//      fetchUser()
 //      logUserOut()
 
     }
@@ -41,6 +51,14 @@ final class MainTabBarController: UITabBarController {
     actionButton.layer.cornerRadius = 56 / 2
   }
 
+  // MARK: - API
+  func fetchUser() {
+    UserService.shared.fetchUser { user in
+//      print(#fileID, #function, #line, "- \(user.username)")
+      self.user = user
+    }
+  }
+
   // 로그인 되었는지 검사
   func authenticationUserAndSetupUI() {
     if Auth.auth().currentUser == nil {
@@ -52,6 +70,7 @@ final class MainTabBarController: UITabBarController {
       }
     } else {
       setupUI()
+      fetchUser()
     }
   }
 

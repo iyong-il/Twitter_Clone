@@ -6,14 +6,30 @@
 //
 
 import UIKit
+import SDWebImage
 
 final class FeedViewController: UIViewController {
 
   // MARK: - 속성
+
+  var user: User? {
+    didSet {
+      setupLeftBarButton()
+    }
+  }
   // 타이틀 이미지
   private lazy var imageView: UIImageView = {
     let iv = UIImageView(image: UIImage(named: "twitter_logo_blue"))
     iv.contentMode = .scaleAspectFit
+
+    return iv
+  }()
+
+  private let profileImageView: UIImageView = {
+    let iv = UIImageView()
+    iv.setDimensions(width: 32, height: 32)
+    iv.layer.cornerRadius = 32 / 2
+    iv.layer.masksToBounds = true
 
     return iv
   }()
@@ -28,9 +44,18 @@ final class FeedViewController: UIViewController {
 
   // MARK: - 메서드
   // UI
-  private func setupUI() {
+  fileprivate func setupUI() {
     self.view.backgroundColor = .white
     self.navigationItem.titleView = imageView
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImageView)
+
+  }
+
+  fileprivate func setupLeftBarButton() {
+    guard let user = user,
+          let url = URL(string: user.profileImageUrl) else { return }
+
+    profileImageView.sd_setImage(with:  url, completed: nil)
 
   }
 
