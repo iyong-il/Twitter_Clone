@@ -19,6 +19,9 @@
 		B101868E290B4BBC00030020 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B101868D290B4BBC00030020 /* LoginViewController.swift */; };
 		B1018690290B4BC600030020 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B101868F290B4BC600030020 /* RegistrationViewController.swift */; };
 		B1018694290B4FBD00030020 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1018693290B4FBD00030020 /* Utilities.swift */; };
+		B16915CA290F88C500D0A4AF /* UploadTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16915C9290F88C500D0A4AF /* UploadTweetViewController.swift */; };
+		B16915CC290F970E00D0A4AF /* CaptionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16915CB290F970E00D0A4AF /* CaptionTextView.swift */; };
+		B16915CF290FA21000D0A4AF /* TweetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16915CE290FA21000D0A4AF /* TweetService.swift */; };
 		B16B87F6290CA75800B77BFB /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16B87F5290CA75800B77BFB /* ExploreViewController.swift */; };
 		B16B87F8290CA76100B77BFB /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16B87F7290CA76100B77BFB /* ConversationsViewController.swift */; };
 		B16B87FA290CA76A00B77BFB /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16B87F9290CA76A00B77BFB /* NotificationViewController.swift */; };
@@ -27,6 +30,7 @@
 		B16B8804290CC81A00B77BFB /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16B8803290CC81A00B77BFB /* AuthService.swift */; };
 		B1DB774C290E0A4B007F8376 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB774B290E0A4B007F8376 /* UserService.swift */; };
 		B1DB774E290E23E3007F8376 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB774D290E23E3007F8376 /* User.swift */; };
+		B1DB7750290E4EBA007F8376 /* VC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB774F290E4EBA007F8376 /* VC+Ext.swift */; };
 		FC4CEA4F4F04D60899314480 /* Pods_Twitter_Clone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB0B5F78ABDB3298A4FC9FD /* Pods_Twitter_Clone.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +52,9 @@
 		B101868D290B4BBC00030020 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B101868F290B4BC600030020 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		B1018693290B4FBD00030020 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		B16915C9290F88C500D0A4AF /* UploadTweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTweetViewController.swift; sourceTree = "<group>"; };
+		B16915CB290F970E00D0A4AF /* CaptionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionTextView.swift; sourceTree = "<group>"; };
+		B16915CE290FA21000D0A4AF /* TweetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetService.swift; sourceTree = "<group>"; };
 		B16B87F5290CA75800B77BFB /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		B16B87F7290CA76100B77BFB /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
 		B16B87F9290CA76A00B77BFB /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +63,7 @@
 		B16B8803290CC81A00B77BFB /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		B1DB774B290E0A4B007F8376 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		B1DB774D290E23E3007F8376 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B1DB774F290E4EBA007F8376 /* VC+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,7 @@
 				B16B87F5290CA75800B77BFB /* ExploreViewController.swift */,
 				B16B87F9290CA76A00B77BFB /* NotificationViewController.swift */,
 				B16B87F7290CA76100B77BFB /* ConversationsViewController.swift */,
+				B16915C9290F88C500D0A4AF /* UploadTweetViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -145,6 +154,7 @@
 			children = (
 				B1018688290B432C00030020 /* UIView+Ext.swift */,
 				B101868A290B433500030020 /* UIColor+Ext.swift */,
+				B1DB774F290E4EBA007F8376 /* VC+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -167,6 +177,7 @@
 		B16B87F3290CA72300B77BFB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B16915CB290F970E00D0A4AF /* CaptionTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,6 +203,7 @@
 			children = (
 				B16B8803290CC81A00B77BFB /* AuthService.swift */,
 				B1DB774B290E0A4B007F8376 /* UserService.swift */,
+				B16915CE290FA21000D0A4AF /* TweetService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -330,7 +342,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1018689290B432C00030020 /* UIView+Ext.swift in Sources */,
+				B1DB7750290E4EBA007F8376 /* VC+Ext.swift in Sources */,
 				B1018665290B36D800030020 /* AppDelegate.swift in Sources */,
+				B16915CA290F88C500D0A4AF /* UploadTweetViewController.swift in Sources */,
 				B16B87FA290CA76A00B77BFB /* NotificationViewController.swift in Sources */,
 				B16B87F6290CA75800B77BFB /* ExploreViewController.swift in Sources */,
 				B1DB774E290E23E3007F8376 /* User.swift in Sources */,
@@ -338,6 +352,7 @@
 				B1018667290B36D800030020 /* SceneDelegate.swift in Sources */,
 				B1018690290B4BC600030020 /* RegistrationViewController.swift in Sources */,
 				B16B8801290CBD9500B77BFB /* Constants.swift in Sources */,
+				B16915CC290F970E00D0A4AF /* CaptionTextView.swift in Sources */,
 				B101868B290B433500030020 /* UIColor+Ext.swift in Sources */,
 				B1018681290B3A8D00030020 /* FeedViewController.swift in Sources */,
 				B101868E290B4BBC00030020 /* LoginViewController.swift in Sources */,
@@ -345,6 +360,7 @@
 				B16B87F8290CA76100B77BFB /* ConversationsViewController.swift in Sources */,
 				B101867F290B38C500030020 /* MainTabBarController.swift in Sources */,
 				B16B8804290CC81A00B77BFB /* AuthService.swift in Sources */,
+				B16915CF290FA21000D0A4AF /* TweetService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,7 +515,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -531,7 +547,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

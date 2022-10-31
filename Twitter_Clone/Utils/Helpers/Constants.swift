@@ -11,6 +11,7 @@ import Firebase
 enum DB {
   static let DB_REF = Database.database().reference()
   static let REF_USERS = DB_REF.child("users")
+  static let REF_TWEETS = DB_REF.child("tweets")
 }
 
 enum STORAGE {

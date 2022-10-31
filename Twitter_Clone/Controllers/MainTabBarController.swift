@@ -88,9 +88,31 @@ final class MainTabBarController: UITabBarController {
   // MARK: - 셀렉터
   // 오른쪽 하단 동그라미버튼
   @objc func actionButtonTapped() {
+    print(#fileID, #function, #line, "- 오른쪽 하단 동그라미 버튼")
+    guard let user = user else { return }
+
+    let vc = UploadTweetViewController()
+    vc.user = user
+    let nav = UINavigationController(rootViewController: vc)
+    nav.modalPresentationStyle = .fullScreen
+    present(nav, animated: true)
 
   }
 
 
 
 }
+
+#if DEBUG
+import SwiftUI
+
+struct MainTabbarViewController_Previews: PreviewProvider {
+
+  static var previews: some View {
+    if #available(iOS 14.0, *) {
+      MainTabBarController().getPreview()
+        .ignoresSafeArea()
+    } 
+  }
+}
+#endif

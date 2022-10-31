@@ -20,6 +20,7 @@ final class FeedViewController: UIViewController {
   // 타이틀 이미지
   private lazy var imageView: UIImageView = {
     let iv = UIImageView(image: UIImage(named: "twitter_logo_blue"))
+    iv.setDimensions(width: 44, height: 44)
     iv.contentMode = .scaleAspectFit
 
     return iv
@@ -53,7 +54,7 @@ final class FeedViewController: UIViewController {
 
   fileprivate func setupLeftBarButton() {
     guard let user = user,
-          let url = URL(string: user.profileImageUrl) else { return }
+          let url = user.profileImageUrl else { return }
 
     profileImageView.sd_setImage(with:  url, completed: nil)
 
@@ -63,3 +64,18 @@ final class FeedViewController: UIViewController {
 
 
 }
+
+#if DEBUG
+import SwiftUI
+
+struct FeedViewController_Previews: PreviewProvider {
+
+  static var previews: some View {
+    if #available(iOS 14.0, *) {
+      FeedViewController().getPreview()
+        .ignoresSafeArea()
+    }
+
+  }
+}
+#endif
