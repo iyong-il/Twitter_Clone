@@ -66,6 +66,15 @@ final class MainTabBarController: UITabBarController {
       $0.navigationBar.compactAppearance = appearance
       $0.navigationBar.scrollEdgeAppearance = appearance
     }
+
+    // 탭바경계선
+    if #available(iOS 15, *) {
+      let appearance = UITabBarAppearance()
+      appearance.configureWithOpaqueBackground()
+      UITabBar.appearance().standardAppearance = appearance
+      UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
+
   }
 
   // 탭바만들기 메서드
