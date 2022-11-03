@@ -7,14 +7,13 @@
 
 import UIKit
 
-class ExploreViewController: UIViewController {
+final class ExploreViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-        setupUI()
-    }
-    
+    setupUI()
+  }
 
   private func setupUI() {
     self.navigationItem.title = "Explore"

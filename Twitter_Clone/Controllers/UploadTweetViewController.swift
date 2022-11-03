@@ -8,8 +8,10 @@
 import UIKit
 import SDWebImage
 
+// MARK: - 트윗화면 VC
 final class UploadTweetViewController: UIViewController {
 
+  
   // MARK: - 속성
   // 이미지를 받아오기위함
   var user: User? {

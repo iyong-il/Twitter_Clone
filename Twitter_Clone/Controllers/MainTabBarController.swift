@@ -43,7 +43,7 @@ final class MainTabBarController: UITabBarController {
   // MARK: - 메서드
   // 탭바구성
   fileprivate func setupVC() {
-    let feed = FeedViewController()
+    let feed = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout())
     let nav1 = templateNavigationController(image: UIImage(named: "home_unselected"), rootVC: feed)
 
     let explore = ExploreViewController()
@@ -160,3 +160,4 @@ struct MainTabbarViewController_Previews: PreviewProvider {
   }
 }
 #endif
+
