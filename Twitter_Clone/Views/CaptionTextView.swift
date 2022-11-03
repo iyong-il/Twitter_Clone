@@ -30,6 +30,8 @@ class CaptionTextView: UITextView {
     super.init(coder: coder)
   }
 
+  // MARK: - 메서드
+  // 텍스트뷰
   fileprivate func setup() {
     self.backgroundColor = .red
     self.font = UIFont.systemFont(ofSize: 16)
@@ -39,11 +41,16 @@ class CaptionTextView: UITextView {
     self.addSubview(placeholderLabel)
     placeholderLabel.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 4)
 
+    // 노티피케이션
+    // 텍스트뷰에 접근하는 순간
     NotificationCenter.default.addObserver(self, selector: #selector(handleTextInputChange), name: UITextView.textDidChangeNotification, object: nil)
   }
 
+  // MARK: - 셀렉터
+  // 텍스트뷰에 접근했을 때
   @objc func handleTextInputChange() {
     placeholderLabel.isHidden = !text.isEmpty
+    
 //    if self.text != "" {
 //      placeholderLabel.text = ""
 //    } else {

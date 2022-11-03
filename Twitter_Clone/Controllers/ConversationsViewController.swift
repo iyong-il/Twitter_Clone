@@ -9,17 +9,17 @@ import UIKit
 
 class ConversationsViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-      setupUI()
+    setupUI()
   }
 
 
-private func setupUI() {
-  self.navigationItem.title = "Conversations"
-  self.view.backgroundColor = .white
-}
+  private func setupUI() {
+    self.navigationItem.title = "Conversations"
+    self.view.backgroundColor = .white
+  }
 
 
 }

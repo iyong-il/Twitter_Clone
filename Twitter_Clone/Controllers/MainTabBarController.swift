@@ -15,11 +15,12 @@ final class MainTabBarController: UITabBarController {
     didSet {
       guard let nav = self.viewControllers?[0] as? UINavigationController else { return }
       guard let feed = nav.viewControllers.first as? FeedViewController else { return }
-//      guard let user = user else { return }
+      //      guard let user = user else { return }
 
       feed.user = user
     }
   }
+  
   lazy var actionButton: UIButton = {
     let button = UIButton(type: .system)
     button.tintColor = .white
@@ -32,19 +33,53 @@ final class MainTabBarController: UITabBarController {
 
   // MARK: - 라이프 사이클
   // 뷰디드로드
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      self.view.backgroundColor = UIColor.twitterBlue
-      setupUI()
-      authenticationUserAndSetupUI()
-//      fetchUser()
-//      logUserOut()
-
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.view.backgroundColor = UIColor.twitterBlue
+    authenticationUserAndSetupUI()
+    //      logUserOut()
+  }
 
   // MARK: - 메서드
+  // 탭바구성
+  fileprivate func setupVC() {
+    let feed = FeedViewController()
+    let nav1 = templateNavigationController(image: UIImage(named: "home_unselected"), rootVC: feed)
+
+    let explore = ExploreViewController()
+    let nav2 = templateNavigationController(image: UIImage(named: "search_unselected"), rootVC: explore)
+
+    let notifications = NotificationViewController()
+    let nav3 = templateNavigationController(image: UIImage(named: "like_unselected"), rootVC: notifications)
+
+    let conversations = ConversationsViewController()
+    let nav4 = templateNavigationController(image: UIImage(named: "ic_mail_outline_white_2x-1"), rootVC: conversations)
+
+    viewControllers = [nav1, nav2, nav3, nav4]
+
+    [nav1, nav2, nav3, nav4].forEach {
+      let appearance = UINavigationBarAppearance()
+      appearance.configureWithOpaqueBackground()
+      appearance.backgroundColor = .white
+      $0.navigationBar.tintColor = .systemBlue
+      $0.navigationBar.standardAppearance = appearance
+      $0.navigationBar.compactAppearance = appearance
+      $0.navigationBar.scrollEdgeAppearance = appearance
+    }
+  }
+
+  // 탭바만들기 메서드
+  private func templateNavigationController(image: UIImage?, rootVC: UIViewController) -> UINavigationController {
+    let nav = UINavigationController(rootViewController: rootVC)
+    nav.tabBarItem.image = image
+    nav.navigationBar.barTintColor = .systemBlue
+
+    return nav
+  }
+  
   // UI
   private func setupUI() {
+    self.tabBar.backgroundColor = .white
     self.view.addSubview(actionButton)
 
     actionButton.anchor(bottom: self.view.safeAreaLayoutGuide.bottomAnchor, right: self.view.rightAnchor, paddingBottom: 64, paddingRight: 16,width: 56, height: 56)
@@ -52,9 +87,8 @@ final class MainTabBarController: UITabBarController {
   }
 
   // MARK: - API
-  func fetchUser() {
+  fileprivate func fetchUser() {
     UserService.shared.fetchUser { user in
-//      print(#fileID, #function, #line, "- \(user.username)")
       self.user = user
     }
   }
@@ -70,12 +104,13 @@ final class MainTabBarController: UITabBarController {
       }
     } else {
       setupUI()
+      setupVC()
       fetchUser()
     }
   }
 
   // 강제 로그아웃
-  func logUserOut() {
+  fileprivate func logUserOut() {
     do {
       try Auth.auth().signOut()
       print(#fileID, #function, #line, "- 로그아웃 되었습니다.")
@@ -112,7 +147,7 @@ struct MainTabbarViewController_Previews: PreviewProvider {
     if #available(iOS 14.0, *) {
       MainTabBarController().getPreview()
         .ignoresSafeArea()
-    } 
+    }
   }
 }
 #endif

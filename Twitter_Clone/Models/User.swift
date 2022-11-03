@@ -20,6 +20,7 @@ struct User {
     self.fullname = dictionary["fullname"] as? String ?? ""
     self.username = dictionary["username"] as? String ?? ""
 
+    // 인스턴스생성시 url을 문자열이 아닌 URL로 받을 수 있게 해주기 위해
     if let profileImageUrlString = dictionary["profileImageUrl"] as? String {
       guard let url = URL(string: profileImageUrlString) else { return }
       self.profileImageUrl = url

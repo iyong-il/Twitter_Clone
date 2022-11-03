@@ -40,6 +40,7 @@ final class FeedViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    fetchTweets()
 
   }
 
@@ -49,7 +50,6 @@ final class FeedViewController: UIViewController {
     self.view.backgroundColor = .white
     self.navigationItem.titleView = imageView
     self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImageView)
-
   }
 
   fileprivate func setupLeftBarButton() {
@@ -57,10 +57,14 @@ final class FeedViewController: UIViewController {
           let url = user.profileImageUrl else { return }
 
     profileImageView.sd_setImage(with:  url, completed: nil)
-
   }
 
+  fileprivate func fetchTweets() {
+    TweetService.shared.fetchTweets { tweets in
+      print(#fileID, #function, #line, "- \(tweets)")
 
+    }
+  }
 
 
 }

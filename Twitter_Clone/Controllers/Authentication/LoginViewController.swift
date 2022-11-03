@@ -54,8 +54,6 @@ final class LoginViewController: UIViewController {
     button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
     button.setTitleColor(.twitterBlue, for: .normal)
     button.backgroundColor = .white
-    // 스택뷰가 fillequaliy라서 주석처리
-    // button.anchor(height: 50)
     button.layer.cornerRadius = 5
     button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
 
@@ -133,6 +131,10 @@ final class LoginViewController: UIViewController {
 
       self.dismiss(animated: true)
     }
+  }
+
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
   }
 
   // 하단버튼
