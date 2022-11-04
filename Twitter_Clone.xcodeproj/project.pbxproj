@@ -30,6 +30,7 @@
 		B16B8801290CBD9500B77BFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16B8800290CBD9500B77BFB /* Constants.swift */; };
 		B16B8804290CC81A00B77BFB /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16B8803290CC81A00B77BFB /* AuthService.swift */; };
 		B18AC6102913A37D00EACE84 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18AC60F2913A37D00EACE84 /* Tweet.swift */; };
+		B1D80AC2291518240048A51A /* TweetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D80AC1291518240048A51A /* TweetViewModel.swift */; };
 		B1DB774C290E0A4B007F8376 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB774B290E0A4B007F8376 /* UserService.swift */; };
 		B1DB774E290E23E3007F8376 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB774D290E23E3007F8376 /* User.swift */; };
 		B1DB7750290E4EBA007F8376 /* VC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DB774F290E4EBA007F8376 /* VC+Ext.swift */; };
@@ -65,6 +66,7 @@
 		B16B8800290CBD9500B77BFB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B16B8803290CC81A00B77BFB /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		B18AC60F2913A37D00EACE84 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		B1D80AC1291518240048A51A /* TweetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewModel.swift; sourceTree = "<group>"; };
 		B1DB774B290E0A4B007F8376 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		B1DB774D290E23E3007F8376 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B1DB774F290E4EBA007F8376 /* VC+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC+Ext.swift"; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		B16B87F2290CA71700B77BFB /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				B1D80AC1291518240048A51A /* TweetViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				B101868E290B4BBC00030020 /* LoginViewController.swift in Sources */,
 				B1DB774C290E0A4B007F8376 /* UserService.swift in Sources */,
 				B16B87F8290CA76100B77BFB /* ConversationsViewController.swift in Sources */,
+				B1D80AC2291518240048A51A /* TweetViewModel.swift in Sources */,
 				B101867F290B38C500030020 /* MainTabBarController.swift in Sources */,
 				B16B8804290CC81A00B77BFB /* AuthService.swift in Sources */,
 				B16915CF290FA21000D0A4AF /* TweetService.swift in Sources */,

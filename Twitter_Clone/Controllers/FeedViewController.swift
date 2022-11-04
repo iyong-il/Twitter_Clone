@@ -13,10 +13,16 @@ private let reuseIdentifier = "TweetCell"
 final class FeedViewController: UICollectionViewController {
 
   // MARK: - 속성
-
   var user: User? {
     didSet {
       setupLeftBarButton()
+    }
+  }
+
+  private var tweets = [Tweet]() {
+    didSet {
+      self.collectionView.reloadData()
+
     }
   }
   // 타이틀 이미지
@@ -64,6 +70,7 @@ final class FeedViewController: UICollectionViewController {
   fileprivate func fetchTweets() {
     TweetService.shared.fetchTweets { tweets in
       print(#fileID, #function, #line, "- 트윗 내용: \(tweets)")
+      self.tweets = tweets
 
     }
   }
@@ -78,10 +85,12 @@ final class FeedViewController: UICollectionViewController {
 // MARK: - 확장 / 컬렉션뷰 데이터소스
 extension FeedViewController {
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5
+    return tweets.count
   }
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
+
+    cell.tweet = tweets[indexPath.row]
     return cell
   }
 }
@@ -89,7 +98,7 @@ extension FeedViewController {
 // MARK: - 확장 / 컬렉션뷰 델리게이트 플로우레이아웃
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: view.frame.width, height: 220)
+    return CGSize(width: view.frame.width, height: 120)
   }
 }
 

@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import SDWebImage
 
 final class TweetCell: UICollectionViewCell {
 
   // MARK: - 속성
+
+  var tweet: Tweet? {
+    didSet {
+      setup()
+    }
+  }
   // 프로필 이미지
   private lazy var profileImageView: UIImageView = {
     let iv = UIImageView()
@@ -143,6 +150,18 @@ final class TweetCell: UICollectionViewCell {
     underLineView.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, height: 1)
     actionStack.centerX(inView: self)
     actionStack.anchor(bottom: self.bottomAnchor, paddingBottom: 8)
+  }
+
+  func setup() {
+    guard let tweet = tweet else { return }
+    let viewModel = TweetViewModel(tweet: tweet)
+
+    profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+    captionLabel.text = tweet.caption
+    infoLabel.attributedText = viewModel.userInfoText
+
+    
+
   }
 
 
