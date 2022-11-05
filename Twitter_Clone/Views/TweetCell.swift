@@ -8,15 +8,20 @@
 import UIKit
 import SDWebImage
 
+protocol TweetCellDelegate: AnyObject {
+  func handleProfileImageTapped()
+}
+
 final class TweetCell: UICollectionViewCell {
 
   // MARK: - 속성
-
   var tweet: Tweet? {
     didSet {
       setup()
     }
   }
+  weak var delegate: TweetCellDelegate?
+
   // 프로필 이미지
   private lazy var profileImageView: UIImageView = {
     let iv = UIImageView()
@@ -26,6 +31,10 @@ final class TweetCell: UICollectionViewCell {
     iv.setDimensions(width: 48, height: 48)
     iv.layer.cornerRadius = 48 / 2
     iv.layer.masksToBounds = true
+
+    let tap = UITapGestureRecognizer(target: self, action: #selector(handleProfileImageTapped))
+    iv.addGestureRecognizer(tap)
+    iv.isUserInteractionEnabled = true
 
     return iv
   }()
@@ -114,6 +123,8 @@ final class TweetCell: UICollectionViewCell {
     return st
   }()
 
+  
+
 
   // MARK: - 라이프사이클
   override func updateConstraints() {
@@ -161,6 +172,12 @@ final class TweetCell: UICollectionViewCell {
     infoLabel.attributedText = viewModel.userInfoText
 
     
+
+  }
+
+  @objc func handleProfileImageTapped() {
+//    print(#fileID, #function, #line, "- 프로필 사진이 눌렸다.")
+    delegate?.handleProfileImageTapped()
 
   }
 
