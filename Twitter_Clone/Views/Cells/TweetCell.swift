@@ -152,9 +152,9 @@ final class TweetCell: UICollectionViewCell {
     self.addSubview(stack)
     self.addSubview(underLineView)
     self.addSubview(actionStack)
-
   }
 
+  // 오토레이아웃
   fileprivate func setupAutoLayout() {
     profileImageView.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 8, paddingLeft: 8)
     stack.anchor(top: profileImageView.topAnchor, left: profileImageView.rightAnchor, right: self.rightAnchor, paddingLeft: 12, paddingRight: 12)
@@ -163,7 +163,8 @@ final class TweetCell: UICollectionViewCell {
     actionStack.anchor(bottom: self.bottomAnchor, paddingBottom: 8)
   }
 
-  func setup() {
+  // didSet
+  fileprivate func setup() {
     guard let tweet = tweet else { return }
     let viewModel = TweetViewModel(tweet: tweet)
 
@@ -175,6 +176,8 @@ final class TweetCell: UICollectionViewCell {
 
   }
 
+  // MARK: - 셀렉터
+  // 프로필사진
   @objc func handleProfileImageTapped() {
 //    print(#fileID, #function, #line, "- 프로필 사진이 눌렸다.")
     delegate?.handleProfileImageTapped()

@@ -23,7 +23,8 @@ final class ProfileViewController: UICollectionViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    navigationController?.navigationBar.isHidden = true
+    self.navigationController?.navigationBar.barStyle = .black
+    self.navigationController?.navigationBar.isHidden = true
   }
 
 
@@ -46,7 +47,7 @@ final class ProfileViewController: UICollectionViewController {
 
 extension ProfileViewController {
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 3
+    return 8
   }
 
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -59,8 +60,9 @@ extension ProfileViewController {
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-    return CGSize(width: view.frame.width, height: 300)
+    return CGSize(width: view.frame.width, height: 350)
   }
+  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: view.frame.width, height: 120)
   }

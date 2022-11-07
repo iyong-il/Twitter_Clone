@@ -42,7 +42,7 @@ final class MainTabBarController: UITabBarController {
 
   // MARK: - 메서드
   // 탭바구성
-  fileprivate func setupVC() {
+  func setupVC() {
     let feed = FeedViewController(collectionViewLayout: UICollectionViewFlowLayout())
     let nav1 = templateNavigationController(image: UIImage(named: "home_unselected"), rootVC: feed)
 
@@ -87,7 +87,7 @@ final class MainTabBarController: UITabBarController {
   }
   
   // UI
-  private func setupUI() {
+  func setupUI() {
     self.tabBar.backgroundColor = .white
     self.view.addSubview(actionButton)
 
@@ -96,7 +96,7 @@ final class MainTabBarController: UITabBarController {
   }
 
   // MARK: - API
-  fileprivate func fetchUser() {
+  func fetchUser() {
     guard let uid = Auth.auth().currentUser?.uid else { return }
     UserService.shared.fetchUser(uid: uid) { user in
       self.user = user

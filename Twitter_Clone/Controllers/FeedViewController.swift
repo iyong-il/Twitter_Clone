@@ -22,7 +22,6 @@ final class FeedViewController: UICollectionViewController {
   private var tweets = [Tweet]() {
     didSet {
       self.collectionView.reloadData()
-
     }
   }
   // 타이틀 이미지
@@ -52,6 +51,11 @@ final class FeedViewController: UICollectionViewController {
     setupCollectionView()
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.navigationController?.navigationBar.isHidden = false
+  }
+
   // MARK: - 메서드
   // UI
   fileprivate func setupUI() {
@@ -69,7 +73,7 @@ final class FeedViewController: UICollectionViewController {
 
   fileprivate func fetchTweets() {
     TweetService.shared.fetchTweets { tweets in
-      print(#fileID, #function, #line, "- 트윗 내용: \(tweets)")
+//      print(#fileID, #function, #line, "- 트윗 내용: \(tweets)")
       self.tweets = tweets
 
     }
