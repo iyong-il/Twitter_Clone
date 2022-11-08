@@ -10,7 +10,6 @@ import UIKit
 final class ProfileHeader: UICollectionReusableView {
 
 
-
   private lazy var containerView: UIView = {
     let view = UIView()
     view.backgroundColor = .twitterBlue
@@ -90,9 +89,18 @@ final class ProfileHeader: UICollectionReusableView {
   
   private let filterBar = ProfileFilterView()
 
+  private let underLineView: UIView = {
+    let view = UIView()
+    view.backgroundColor = .twitterBlue
+
+    return view
+  }()
+
 
   override init(frame: CGRect) {
     super.init(frame: frame)
+
+    filterBar.delegate = self
 
     self.addSubview(containerView)
     containerView.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, height: 108)
@@ -112,6 +120,9 @@ final class ProfileHeader: UICollectionReusableView {
 
     self.addSubview(filterBar)
     filterBar.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, height: 50)
+
+    self.addSubview(underLineView)
+    underLineView.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, width: frame.width / 3, height: 2)
 
 
   }
@@ -135,4 +146,17 @@ final class ProfileHeader: UICollectionReusableView {
   }
 
 
+}
+
+extension ProfileHeader: ProfileFilterViewDelegate {
+  func filterView(_ view: ProfileFilterView, didSelect indexPath: IndexPath) {
+    let cell = view.collectionView.cellForItem(at: indexPath) as! ProfileFilterCell
+
+    let xPosition = cell.frame.origin.x
+    UIView.animate(withDuration: 0.3) {
+      self.underLineView.frame.origin.x = xPosition
+    }
+  }
+
+  
 }

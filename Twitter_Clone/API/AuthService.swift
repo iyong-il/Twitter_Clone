@@ -38,7 +38,7 @@ struct AuthService {
     let filename = NSUUID().uuidString
     let storageRef = STORAGE.STORAGE_PROFILE_IMAGES.child(filename)
 
-    // 파이어베이스 storage
+    // storage
     storageRef.putData(imageData, metadata: nil) { (meta, error) in
       storageRef.downloadURL { (url, error) in
 
@@ -46,17 +46,18 @@ struct AuthService {
           print(#fileID, #function, #line, "- \(error.localizedDescription)")
 
         }
+        
         guard let profileImageUrl = url?.absoluteString else { return }
 
 
-        // 파이어베이스 auth
+        // auth
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
           if let error = error {
             print(error.localizedDescription)
             return
           }
 
-          // 파이어베이스 database
+          // database
           guard let uid = result?.user.uid else { return }
           let values = ["email": email, "username": username, "fullname": fullname, "profileImageUrl": profileImageUrl]
 

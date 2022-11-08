@@ -9,13 +9,17 @@ import Foundation
 import Firebase
 
 
-enum DB {
+struct DB {
   static let DB_REF = Database.database().reference()
   static let REF_USERS = DB_REF.child("users")
   static let REF_TWEETS = DB_REF.child("tweets")
+  
+  private init() {}
 }
 
-enum STORAGE {
+struct STORAGE {
   static let STORAGE_REF = Storage.storage().reference()
   static let STORAGE_PROFILE_IMAGES = STORAGE_REF.child("profile_images")
+
+  private init() {}
 }

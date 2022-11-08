@@ -9,7 +9,13 @@ import UIKit
 
 private let reuseIdentifier = "ProfileFilterCell"
 
+protocol ProfileFilterViewDelegate: AnyObject {
+  func filterView(_ view: ProfileFilterView, didSelect indexPath: IndexPath)
+}
+
 final class ProfileFilterView: UIView {
+
+  weak var delegate: ProfileFilterViewDelegate?
 
   lazy var collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -18,6 +24,11 @@ final class ProfileFilterView: UIView {
     collectionView.backgroundColor = .white
     collectionView.delegate = self
     collectionView.dataSource = self
+
+    let seletedIndexPath = IndexPath(row: 0, section: 0)
+    collectionView.selectItem(at: seletedIndexPath, animated: true, scrollPosition: .left)
+
+
 
     collectionView.register(ProfileFilterCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
@@ -46,11 +57,16 @@ extension ProfileFilterView: UICollectionViewDataSource {
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-    return 3
+    return ProfileFilterOptions.allCases.count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProfileFilterCell
+
+    
+    let option = ProfileFilterOptions(rawValue: indexPath.row)
+    cell.option = option
+    
 
     return cell
   }
@@ -59,10 +75,17 @@ extension ProfileFilterView: UICollectionViewDataSource {
 
 }
 
+extension ProfileFilterView: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    delegate?.filterView(self, didSelect: indexPath)
+  }
+}
+
 extension ProfileFilterView: UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let size = CGSize(width: self.frame.width / 3, height: self.frame.height)
+    let count = CGFloat(ProfileFilterOptions.allCases.count)
+    let size = CGSize(width: self.frame.width / count, height: self.frame.height)
     
     return size
   }
@@ -70,5 +93,13 @@ extension ProfileFilterView: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 0
   }
+
+}
+
+extension ProfileFilterView: ProfileFilterViewDelegate {
+  func filterView(_ view: ProfileFilterView, didSelect indexPath: IndexPath) {
+
+  }
+
 
 }
