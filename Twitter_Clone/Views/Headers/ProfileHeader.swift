@@ -9,6 +9,12 @@ import UIKit
 
 final class ProfileHeader: UICollectionReusableView {
 
+  var user: User? {
+    didSet {
+      configure()
+    }
+  }
+
 
   private lazy var containerView: UIView = {
     let view = UIView()
@@ -31,7 +37,7 @@ final class ProfileHeader: UICollectionReusableView {
 
   private lazy var profileImageView: UIImageView = {
     let iv = UIImageView()
-    iv.contentMode = .scaleAspectFit
+    iv.contentMode = .scaleAspectFill
     iv.clipsToBounds = true
     iv.backgroundColor = .black
     iv.layer.borderWidth = 4
@@ -86,6 +92,37 @@ final class ProfileHeader: UICollectionReusableView {
 
     return st
   }()
+
+  private let followingLabel: UILabel = {
+    let label = UILabel()
+
+    let followTap = UITapGestureRecognizer(target: self, action: #selector(handleFollowersTapped))
+
+    label.addGestureRecognizer(followTap)
+    label.isUserInteractionEnabled = true
+
+    return label
+  }()
+
+  private let followersLabel: UILabel = {
+    let label = UILabel()
+
+    let followTap = UITapGestureRecognizer(target: self, action: #selector(handleFollowingTapped))
+
+    label.addGestureRecognizer(followTap)
+    label.isUserInteractionEnabled = true
+
+    return label
+  }()
+
+  private lazy var followStack: UIStackView = {
+    let st = UIStackView(arrangedSubviews: [followingLabel, followersLabel])
+    st.axis = .horizontal
+    st.spacing = 8
+    st.distribution = .fillEqually
+
+    return st
+  }()
   
   private let filterBar = ProfileFilterView()
 
@@ -118,6 +155,9 @@ final class ProfileHeader: UICollectionReusableView {
     self.addSubview(userDetailStack)
     userDetailStack.anchor(top: profileImageView.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 12, paddingRight: 12)
 
+    self.addSubview(followStack)
+    followStack.anchor(top: userDetailStack.bottomAnchor, left: self.leftAnchor, paddingTop: 8, paddingLeft: 12)
+
     self.addSubview(filterBar)
     filterBar.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, height: 50)
 
@@ -127,12 +167,22 @@ final class ProfileHeader: UICollectionReusableView {
 
   }
 
-
-
-
-
   required init?(coder: NSCoder) {
     super.init(coder: coder)
+  }
+
+  private func configure() {
+    guard let user = user else { return }
+    guard let url = user.profileImageUrl else { return }
+
+    fullnameLabel.text = user.fullname
+    usernameLabel.text = "@ \(user.username)"
+    profileImageView.sd_setImage(with: url)
+
+    let viewModel = ProfileHeaderViewModel(user: user)
+
+    followingLabel.attributedText = viewModel.followingText
+    followersLabel.attributedText = viewModel.followersText
   }
 
 
@@ -145,6 +195,13 @@ final class ProfileHeader: UICollectionReusableView {
 
   }
 
+  @objc func handleFollowersTapped() {
+
+  }
+
+  @objc func handleFollowingTapped() {
+
+  }
 
 }
 

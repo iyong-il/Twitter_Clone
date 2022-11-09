@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import SDWebImage
 
 private let reuseIdentifier = "TweetCell"
 private let headerIdentifier = "ProfileHeader"
 
 final class ProfileViewController: UICollectionViewController {
 
-
+  var user: User?
 
 
 
@@ -37,6 +38,8 @@ final class ProfileViewController: UICollectionViewController {
     collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
 
   }
+
+
 
 
 
@@ -71,6 +74,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 extension ProfileViewController {
   override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
+    header.user = user
 
     return header
   }

@@ -96,10 +96,10 @@ extension ProfileFilterView: UICollectionViewDelegateFlowLayout {
 
 }
 
-extension ProfileFilterView: ProfileFilterViewDelegate {
-  func filterView(_ view: ProfileFilterView, didSelect indexPath: IndexPath) {
-
-  }
-
-
-}
+//extension ProfileFilterView: ProfileFilterViewDelegate {
+//  func filterView(_ view: ProfileFilterView, didSelect indexPath: IndexPath) {
+//
+//  }
+//
+//
+//}
