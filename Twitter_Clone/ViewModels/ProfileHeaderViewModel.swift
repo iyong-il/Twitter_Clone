@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 enum ProfileFilterOptions: Int, CaseIterable {
   case tweets
   case replies
@@ -29,16 +30,20 @@ struct ProfileHeaderViewModel {
   private let user: User
 
   var followersText: NSAttributedString? {
-    return attributedText(withValue: 0, text: "followers")
+    return attributedText(withValue: 0, text: " followers")
   }
 
   var followingText: NSAttributedString? {
-    return attributedText(withValue: 2, text: "following")
+    return attributedText(withValue: 2, text: " following")
   }
 
-//  var actionButtontitle: String {
-//    
-//  }
+  var actionButtontitle: String {
+    if user.isCurrentUser {
+      return "Edit Profile"
+    } else {
+      return "Follow"
+    }
+  }
 
 
 

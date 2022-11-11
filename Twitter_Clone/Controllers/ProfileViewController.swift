@@ -15,8 +15,6 @@ final class ProfileViewController: UICollectionViewController {
 
   var user: User?
 
-
-
   override func viewDidLoad() {
     super.viewDidLoad()
       setupCollectionView()
@@ -31,7 +29,6 @@ final class ProfileViewController: UICollectionViewController {
 
   fileprivate func setupCollectionView() {
     collectionView.backgroundColor = .white
-    // ignoreSafeArea의 느낌
     collectionView.contentInsetAdjustmentBehavior = .never
 
     collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -50,7 +47,7 @@ final class ProfileViewController: UICollectionViewController {
 
 extension ProfileViewController {
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 8
+    return 3
   }
 
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -75,7 +72,16 @@ extension ProfileViewController {
   override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
     header.user = user
+    header.delegate = self
 
     return header
   }
+}
+
+extension ProfileViewController: ProfileHeaderDelegate {
+  func handleDismissal() {
+    self.navigationController?.popViewController(animated: true)
+  }
+
+
 }

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ProfileHeaderDelegate: AnyObject {
+  func handleDismissal()
+}
+
 final class ProfileHeader: UICollectionReusableView {
 
   var user: User? {
@@ -14,7 +18,7 @@ final class ProfileHeader: UICollectionReusableView {
       configure()
     }
   }
-
+  weak var delegate: ProfileHeaderDelegate?
 
   private lazy var containerView: UIView = {
     let view = UIView()
@@ -181,6 +185,7 @@ final class ProfileHeader: UICollectionReusableView {
 
     let viewModel = ProfileHeaderViewModel(user: user)
 
+    editProfileFollowButton.setTitle(viewModel.actionButtontitle, for: .normal)
     followingLabel.attributedText = viewModel.followingText
     followersLabel.attributedText = viewModel.followersText
   }
@@ -188,7 +193,7 @@ final class ProfileHeader: UICollectionReusableView {
 
 
   @objc func handleDismissal() {
-
+    delegate?.handleDismissal()
   }
 
   @objc func handleEditProfileFollow() {
